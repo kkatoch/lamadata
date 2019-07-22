@@ -22,5 +22,9 @@ public class Order {
     @JoinColumn(name = "product_id", nullable = false)
     private Set<Product> product;
 
+    @OneToOne
+    @JoinColumn(name = "currency_id")
+    private Currency currency;
+
     private OrderStatus orderStatus = OrderStatus.DRAFT;
 }
