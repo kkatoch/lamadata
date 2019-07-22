@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -34,7 +35,11 @@ public class Artist {
 
     @OneToMany
     @JoinColumn(name = "artist_type_id", nullable = false)
-    private List<ArtistType> artistTypes;
+    private Set<ArtistType> artistTypes;
+
+    @OneToMany
+    @JoinColumn(name = "award_id")
+    private Set<Award> awards;
 
     @CreationTimestamp
     private Date createdAt;

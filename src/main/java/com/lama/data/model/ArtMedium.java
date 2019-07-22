@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -19,5 +20,5 @@ public class ArtMedium {
 
     @OneToMany
     @JoinColumn(name = "product_id")
-    private List<Product> products;
+    private Set<Product> products;
 }
