@@ -17,8 +17,4 @@ public class ArtistType {
 
     @NotBlank(message = "Name is mandatory")
     private String name;
-
-    @OneToMany
-    @JoinColumn(name = "artist_id", nullable = false)
-    private Set<Artist> artist;
 }

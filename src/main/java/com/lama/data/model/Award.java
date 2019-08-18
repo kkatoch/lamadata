@@ -19,14 +19,6 @@ public class Award {
     @NotBlank(message = "Name is mandatory")
     private String name;
 
-    @OneToMany
-    @JoinColumn(name = "artist_id")
-    private Set<Artist> artists;
-
-    @OneToMany
-    @JoinColumn(name = "seller_id")
-    private Set<Seller> sellers;
-
     @NotNull(message = "Award Date is mandatory")
     private Date awardDate;
 }

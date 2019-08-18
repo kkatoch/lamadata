@@ -1,5 +1,8 @@
 package com.lama.data.model;
 
+import com.lama.data.model.Seller;
+import com.lama.data.repository.ArtistType;
+import com.lama.data.repository.Award;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -7,7 +10,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @Entity

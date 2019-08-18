@@ -1,5 +1,6 @@
 package com.lama.data.model;
 
+import com.lama.data.repository.Country;
 import lombok.Data;
 
 import javax.persistence.*;

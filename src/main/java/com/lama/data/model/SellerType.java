@@ -16,8 +16,4 @@ public class SellerType {
 
     @NotBlank(message = "Name is mandatory")
     private String name;
-
-    @OneToMany
-    @JoinColumn(name = "seller_id", nullable = false)
-    private Set<Seller> sellers;
 }
