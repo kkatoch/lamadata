@@ -1,8 +1,5 @@
 package com.lama.data.model;
 
-import com.lama.data.model.Seller;
-import com.lama.data.repository.ArtistType;
-import com.lama.data.repository.Award;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -14,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Data
-@Table(name = "artists")
+@Table(name = "artist")
 public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,22 +23,22 @@ public class Artist {
     @NotBlank(message = "Last Name is mandatory")
     private String lastName;
 
-    @OneToOne
-    @JoinColumn(name = "seller_id", nullable = false)
-    private Seller seller;
-
     @NotBlank(message = "Description is mandatory")
     private String description;
 
     private String education;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "artist_type_id", nullable = false)
     private Set<ArtistType> artistTypes;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "award_id")
     private Set<Award> awards;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "art_listings_id")
+    private Set<ArtListing> artListings;
 
     @CreationTimestamp
     private Date createdAt;

@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 @Data
@@ -18,7 +17,7 @@ public class ArtListing {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "product_id")
     private Product product;
 
@@ -36,7 +35,7 @@ public class ArtListing {
     @NotNull(message = "Is Sell is mandatory")
     private boolean isSell;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "currency_id")
     private Currency currency;
 

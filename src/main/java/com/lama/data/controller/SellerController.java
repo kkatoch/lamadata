@@ -5,7 +5,6 @@ import com.lama.data.service.SellerService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,9 +16,8 @@ import java.util.Optional;
 @RequestMapping("/api/sellers")
 @Slf4j
 @RequiredArgsConstructor
-@Api(tags = "Sellers", description = "Controller for Sellers")
+@Api(tags = "Sellers")
 public class SellerController {
-    @Autowired
     private final SellerService sellerService;
 
     @GetMapping

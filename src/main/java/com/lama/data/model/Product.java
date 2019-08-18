@@ -7,9 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -23,19 +21,19 @@ public class Product {
     @NotBlank(message = "Name is mandatory")
     private String name;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "color_id", nullable = false)
     private Color color;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "art_medium_id", nullable = false)
     private ArtMedium artMedium;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "art_category_id", nullable = false)
     private ArtCategory artCategory;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "art_style_id", nullable = false)
     private ArtStyle artStyle;
 
@@ -60,7 +58,7 @@ public class Product {
     @NotBlank(message = "Description is mandatory")
     private String description;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "tag_id", nullable = false)
     private Set<Tag> tags;
 

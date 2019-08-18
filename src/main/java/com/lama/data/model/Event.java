@@ -6,7 +6,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 @Data
@@ -18,14 +17,6 @@ public class Event {
 
     @NotBlank(message = "Name is mandatory")
     private String name;
-
-    @OneToMany
-    @JoinColumn(name = "artist_id")
-    private Set<Artist> artists;
-
-    @OneToMany
-    @JoinColumn(name = "seller_id")
-    private Set<Seller> sellers;
 
     @NotNull(message = "Event Date is mandatory")
     private Date eventDate;

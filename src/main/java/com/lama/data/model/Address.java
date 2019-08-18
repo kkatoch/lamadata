@@ -1,6 +1,5 @@
 package com.lama.data.model;
 
-import com.lama.data.repository.Country;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,7 +13,7 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 
