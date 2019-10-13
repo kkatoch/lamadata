@@ -25,7 +25,7 @@ public class Image {
     @NotBlank(message = "Large URL is mandatory")
     private String largeUrl;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 

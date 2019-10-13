@@ -62,6 +62,10 @@ public class Product {
     @JoinColumn(name = "tag_id", nullable = false)
     private Set<Tag> tags;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id", nullable = false)
+    private Set<Image> images;
+
     @CreationTimestamp
     private Date createdAt;
 

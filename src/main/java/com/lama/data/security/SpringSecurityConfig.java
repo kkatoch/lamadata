@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:application-${spring.profiles.active}.properties")
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthenticationEntryPoint authEntryPoint;
