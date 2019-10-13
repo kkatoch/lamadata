@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -15,7 +16,7 @@ import java.util.Set;
 public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private UUID id;
 
     @NotBlank(message = "First Name is mandatory")
     private String firstName;
@@ -39,6 +40,10 @@ public class Artist {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "art_listings_id")
     private Set<ArtListing> artListings;
+
+    @ManyToOne
+    @JoinColumn(name = "seller_id", nullable = false)
+    private Seller seller;
 
     @CreationTimestamp
     private Date createdAt;

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +20,7 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public Optional<Order> findById(Long id) {
+    public Optional<Order> findById(UUID id) {
         return orderRepository.findById(id);
     }
 
@@ -27,7 +28,7 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(UUID id) {
         orderRepository.deleteById(id);
     }
 }

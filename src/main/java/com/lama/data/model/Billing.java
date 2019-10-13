@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -13,7 +14,7 @@ public class Billing {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private UUID id;
 
     @NotBlank(message = "First Name is mandatory")
     private String firstName;
@@ -39,7 +40,7 @@ public class Billing {
     @NotBlank(message = "PaypalAddress is mandatory")
     private String paypalAddress;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_id", nullable = false)
     private Contact contact;
 }

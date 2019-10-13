@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -15,7 +16,7 @@ import java.util.Set;
 public class Seller {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private UUID id;
 
     @NotBlank(message = "First Name is mandatory")
     private String firstName;
@@ -31,7 +32,7 @@ public class Seller {
 
     private boolean isEmailVerified = false;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_id", nullable = false)
     private Contact contact;
 
@@ -39,7 +40,7 @@ public class Seller {
     @JoinColumn(name = "billing_id")
     private Billing billing;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "seller_type_id", nullable = false)
     private SellerType sellerType;
 

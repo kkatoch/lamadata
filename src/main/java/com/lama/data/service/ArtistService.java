@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +20,7 @@ public class ArtistService {
         return artistRepository.findAll();
     }
 
-    public Optional<Artist> findById(Long id) {
+    public Optional<Artist> findById(UUID id) {
         return artistRepository.findById(id);
     }
 
@@ -27,7 +28,7 @@ public class ArtistService {
         return artistRepository.save(artist);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(UUID id) {
         artistRepository.deleteById(id);
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/buyers")
@@ -31,7 +32,7 @@ public class BuyerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Buyer> findById(@PathVariable Long id) {
+    public ResponseEntity<Buyer> findById(@PathVariable UUID id) {
         Optional<Buyer> buyer = buyerService.findById(id);
         if (!buyer.isPresent()) {
             log.error("Id " + id + " is not existed");
@@ -42,7 +43,7 @@ public class BuyerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Buyer> update(@PathVariable Long id, @Valid @RequestBody Buyer buyer) {
+    public ResponseEntity<Buyer> update(@PathVariable UUID id, @Valid @RequestBody Buyer buyer) {
         if (!buyerService.findById(id).isPresent()) {
             log.error("Id " + id + " is not existed");
             ResponseEntity.badRequest().build();
@@ -52,7 +53,7 @@ public class BuyerController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable Long id) {
+    public ResponseEntity delete(@PathVariable UUID id) {
         if (!buyerService.findById(id).isPresent()) {
             log.error("Id " + id + " is not existed");
             ResponseEntity.badRequest().build();

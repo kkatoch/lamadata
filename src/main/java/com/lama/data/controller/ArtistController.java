@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/artists")
@@ -31,7 +32,7 @@ public class ArtistController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Artist> findById(@PathVariable Long id) {
+    public ResponseEntity<Artist> findById(@PathVariable UUID id) {
         Optional<Artist> artist = artistService.findById(id);
         if (!artist.isPresent()) {
             log.error("Id " + id + " is not existed");
@@ -42,7 +43,7 @@ public class ArtistController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Artist> update(@PathVariable Long id, @Valid @RequestBody Artist artist) {
+    public ResponseEntity<Artist> update(@PathVariable UUID id, @Valid @RequestBody Artist artist) {
         if (!artistService.findById(id).isPresent()) {
             log.error("Id " + id + " is not existed");
             ResponseEntity.badRequest().build();
@@ -52,7 +53,7 @@ public class ArtistController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable Long id) {
+    public ResponseEntity delete(@PathVariable UUID id) {
         if (!artistService.findById(id).isPresent()) {
             log.error("Id " + id + " is not existed");
             ResponseEntity.badRequest().build();

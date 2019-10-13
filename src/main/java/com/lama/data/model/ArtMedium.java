@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -11,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 public class ArtMedium {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private UUID id;
 
     @NotBlank(message = "Name is mandatory")
     private String name;

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +20,7 @@ public class BuyerService {
         return buyerRepository.findAll();
     }
 
-    public Optional<Buyer> findById(Long id) {
+    public Optional<Buyer> findById(UUID id) {
         return buyerRepository.findById(id);
     }
 
@@ -27,7 +28,7 @@ public class BuyerService {
         return buyerRepository.save(buyer);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(UUID id) {
         buyerRepository.deleteById(id);
     }
 }

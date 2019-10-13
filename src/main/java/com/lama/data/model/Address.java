@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -11,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private UUID id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "country_id", nullable = false)
