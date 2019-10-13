@@ -24,6 +24,7 @@ public class Seller {
     @NotBlank(message = "Last Name is mandatory")
     private String lastName;
 
+    @Column(unique=true)
     @NotBlank(message = "Email is mandatory")
     private String email;
 

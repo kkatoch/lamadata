@@ -14,6 +14,7 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(unique = true)
     @NotBlank(message = "Name is mandatory")
     private String name;
 }
