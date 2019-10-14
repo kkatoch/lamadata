@@ -11,7 +11,6 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "contacts")
 public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,8 +19,9 @@ public class Contact {
     @NotNull(message = "Phone Number is mandatory")
     private int phoneNumber;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn
+    @NotNull(message = "Contact must have an Address")
     private Address address;
 
     @CreationTimestamp

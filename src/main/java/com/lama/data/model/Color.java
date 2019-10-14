@@ -8,12 +8,12 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "colors")
 public class Color {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(unique = true)
     @NotBlank(message = "Name is mandatory")
     private String name;
 }

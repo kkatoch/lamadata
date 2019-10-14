@@ -13,7 +13,6 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,19 +22,23 @@ public class Product {
     private String name;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "color_id", nullable = false)
+    @JoinColumn
+    @NotNull(message = "Product must have a Color")
     private Color color;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "art_medium_id", nullable = false)
+    @JoinColumn
+    @NotNull(message = "Product must have a Medium")
     private ArtMedium artMedium;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "art_category_id", nullable = false)
+    @JoinColumn
+    @NotNull(message = "Product must have an Art Category")
     private ArtCategory artCategory;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "art_style_id", nullable = false)
+    @JoinColumn
+    @NotNull(message = "Product must have an Art Style")
     private ArtStyle artStyle;
 
     @NotNull(message = "Height is mandatory")
@@ -59,13 +62,10 @@ public class Product {
     @NotBlank(message = "Description is mandatory")
     private String description;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "tag_id", nullable = false)
-    private Set<Tag> tags;
-
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "image_id", nullable = false)
-    private Set<Image> images;
+    @JoinColumn(name = "tag_product_id")
+    @NotNull(message = "Product must have a Product Tag")
+    private Set<Tag> Tag;
 
     @CreationTimestamp
     private Date createdAt;

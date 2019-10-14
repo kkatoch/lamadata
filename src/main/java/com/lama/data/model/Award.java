@@ -10,13 +10,13 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "awards")
 public class Award {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @NotBlank(message = "Name is mandatory")
+    @Column(unique = true)
+    @NotBlank(message = "Award Name is mandatory")
     private String name;
 
     @NotNull(message = "Award Date is mandatory")

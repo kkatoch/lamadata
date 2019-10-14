@@ -1,8 +1,11 @@
 package com.lama.data.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 import java.util.UUID;
 
@@ -14,17 +17,21 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @OneToOne
-    @JoinColumn(name = "buyer_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "buyer_id")
+    @NotNull(message = "Order must have a buyer ID")
     private Buyer buyer;
 
     @OneToMany
-    @JoinColumn(name = "product_id", nullable = false)
-    private Set<Product> product;
+    @NotNull(message = "An Order must have Order Items")
+    @JoinColumn
+    private Set<OrderItem> orderItems;
 
     @OneToOne
-    @JoinColumn(name = "currency_id")
+    @JoinColumn
+    @NotNull(message = "Order must have a Currency")
     private Currency currency;
 
+    @NotNull(message = "Order must have an Order Status")
     private OrderStatus orderStatus = OrderStatus.DRAFT;
 }

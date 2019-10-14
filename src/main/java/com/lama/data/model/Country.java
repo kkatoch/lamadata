@@ -9,15 +9,16 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "countries")
 public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(unique = true)
     @NotBlank(message = "Name is mandatory")
     private String name;
 
+    @Column(unique = true)
     @NotNull(message = "Country Code is mandatory")
     private int code;
 }

@@ -13,15 +13,16 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "Currencies")
 public class Currency {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(unique = true)
     @NotBlank(message = "Name is mandatory")
     private String name;
 
+    @Column(unique = true)
     @NotBlank(message = "Symbol is mandatory")
     private String symbol;
 

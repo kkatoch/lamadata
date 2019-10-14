@@ -6,13 +6,13 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "artist")
 public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,19 +30,20 @@ public class Artist {
     private String education;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "artist_type_id", nullable = false)
+    @JoinColumn
+    @NotNull(message = "Artist must have Artist Types")
     private Set<ArtistType> artistTypes;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "award_id")
+    @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "award_artist_id")
     private Set<Award> awards;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "art_listings_id")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "artist")
     private Set<ArtListing> artListings;
 
     @ManyToOne
-    @JoinColumn(name = "seller_id", nullable = false)
+    @NotNull(message = "Artist must have a Seller Id")
+    @JoinColumn(name = "seller_id")
     private Seller seller;
 
     @CreationTimestamp

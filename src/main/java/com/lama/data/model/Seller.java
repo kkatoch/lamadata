@@ -6,13 +6,13 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "sellers")
 public class Seller {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,30 +28,29 @@ public class Seller {
     @NotBlank(message = "Email is mandatory")
     private String email;
 
-    @NotBlank(message = "password is mandatory")
-    private String password;
-
     private boolean isEmailVerified = false;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "contact_id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn
+    @NotNull(message = "Seller must have a Contact")
     private Contact contact;
 
-    @OneToOne
-    @JoinColumn(name = "billing_id")
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn
     private Billing billing;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "seller_type_id", nullable = false)
+    @JoinColumn
+    @NotNull(message = "Seller must have a Seller Type")
     private SellerType sellerType;
 
     private boolean isVerified = false;
 
     private String description;
 
-    @OneToMany
-    @JoinColumn(name = "artist_id")
-    private Set<Artist> artists;
+    @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.MERGE, CascadeType.REFRESH,CascadeType.PERSIST})
+    @JoinColumn(name = "award_seller_id")
+    private Set<Award> awards;
 
     @CreationTimestamp
     private Date createdAt;

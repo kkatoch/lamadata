@@ -6,28 +6,32 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "images")
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(unique = true)
     @NotBlank(message = "Small URL is mandatory")
     private String smallUrl;
 
+    @Column(unique = true)
     @NotBlank(message = "Medium URL is mandatory")
     private String mediumUrl;
 
+    @Column(unique = true)
     @NotBlank(message = "Large URL is mandatory")
     private String largeUrl;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false)
+    @NotNull(message = "Image must have a Product")
+    @JoinColumn(name = "product_id")
     private Product product;
 
     @CreationTimestamp

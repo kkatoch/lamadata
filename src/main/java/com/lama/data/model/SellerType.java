@@ -8,7 +8,6 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "seller_types")
 public class SellerType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

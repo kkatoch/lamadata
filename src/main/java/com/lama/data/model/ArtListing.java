@@ -12,18 +12,18 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "art_listings")
 public class ArtListing {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @NotNull(message = "Art Listing must have a Product")
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "product_id")
+    @JoinColumn
     private Product product;
 
-    @OneToOne
-    @JoinColumn(name = "artist_id")
+    @NotNull(message = "Listing must have an Artist Id")
+    @ManyToOne(cascade = CascadeType.ALL)
     private Artist artist;
 
     @NotNull(message = "Price is mandatory")
@@ -36,10 +36,10 @@ public class ArtListing {
     @NotNull(message = "Is Sell is mandatory")
     private boolean isSell;
 
+    @NotNull(message = "Art Listing must have a Currency")
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "currency_id")
+    @JoinColumn
     private Currency currency;
-
 
     @CreationTimestamp
     private Date createdAt;

@@ -9,7 +9,6 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "billing")
 public class Billing {
 
     @Id
@@ -40,7 +39,8 @@ public class Billing {
     @NotBlank(message = "PaypalAddress is mandatory")
     private String paypalAddress;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "contact_id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn
+    @NotNull(message = "Billing must have a Contact")
     private Contact contact;
 }

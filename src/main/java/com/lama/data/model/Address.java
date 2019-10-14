@@ -4,18 +4,19 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "address")
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "country_id", nullable = false)
+    @JoinColumn
+    @NotNull(message = "Address must have country")
     private Country country;
 
     @NotBlank(message = "First Line of Address is mandatory")

@@ -8,7 +8,6 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "art_styles")
 public class ArtStyle {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

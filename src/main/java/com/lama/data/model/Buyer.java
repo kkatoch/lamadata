@@ -6,13 +6,13 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "buyers")
 public class Buyer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,26 +24,24 @@ public class Buyer {
     @NotBlank(message = "Last Name is mandatory")
     private String lastName;
 
+    @Column(unique=true)
     @NotBlank(message = "Email is mandatory")
     private String email;
 
-    @NotBlank(message = "password is mandatory")
-    private String password;
-
     private boolean isEmailVerified = false;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "contact_id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn
+    @NotNull(message = "Buyer must have a contact")
     private Contact contact;
 
-    @OneToOne
-    @JoinColumn(name = "billing_id")
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn
     private Billing billing;
 
     private boolean isVerified = false;
 
-    @OneToMany
-    @JoinColumn(name = "order_id")
+    @OneToMany(mappedBy = "buyer")
     private Set<Order> orders;
 
     @CreationTimestamp
