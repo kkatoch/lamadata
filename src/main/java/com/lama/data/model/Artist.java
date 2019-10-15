@@ -34,7 +34,7 @@ public class Artist {
     @NotNull(message = "Artist must have Artist Types")
     private Set<ArtistType> artistTypes;
 
-    @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "award_artist_id")
     private Set<Award> awards;
 

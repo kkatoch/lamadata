@@ -48,7 +48,7 @@ public class Seller {
 
     private String description;
 
-    @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.MERGE, CascadeType.REFRESH,CascadeType.PERSIST})
+    @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.MERGE, CascadeType.REFRESH,CascadeType.PERSIST})
     @JoinColumn(name = "award_seller_id")
     private Set<Award> awards;
 
